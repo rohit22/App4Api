@@ -25,13 +25,13 @@ public class Test {
 		String configPath = "/Users/Admin/Documents/DigitalIntern2015/workspace/GeoCodeAPI/etc/config.xml";
 		String config = "HumanResource";
 		String timeStamp = "2008";
-		String inputFile = "/Users/Admin/Documents/DigitalIntern2015/workspace/GeoCodeAPI/test/HRW1.csv";
-		String outputFile = "/Users/Admin/Documents/DigitalIntern2015/workspace/GeoCodeAPI/test/result_HR1.csv";	
+		String inputFile = "/Users/Admin/Documents/DigitalIntern2015/workspace/GeoCodeAPI/test/Data set URLs HRWA-SOLR 2016_tlds.csv";
+		String outputFile = "/Users/Admin/Documents/DigitalIntern2015/workspace/GeoCodeAPI/test/result_Data set URLs HRWA-SOLR 2016_tlds_2.csv";
 		String[] keys = new String[2];
 		keys[0] = "date_of_capture_yyyymmdd";
 		keys[1] = "archived_url";
 		RunForLargeFilesHR check = new RunForLargeFilesHR(configPath, config);		
-		check.runHRWithFile(inputFile, outputFile, timeStamp,  1, keys, false);
+		check.runHRWithFile(inputFile, outputFile, timeStamp,  1, keys, true,"rohit14331@gmail.com");
 	}
 	
 }

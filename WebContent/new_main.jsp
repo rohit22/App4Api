@@ -32,9 +32,10 @@
 
 				
 				<%
-					String name = request.getParameter("name");
+					String email = request.getParameter("email");
 					String url = request.getParameter("url");
 					session.setAttribute("url", url);
+					session.setAttribute("email", email);
 					UrlCall call = new UrlCall(url);
 					String json= call.getUrlResult();
 					JsonHolder holder = new JsonHolder(json);
@@ -85,7 +86,7 @@
 								%>
 							</tr>
 						</table>
-						
+						<br><br>
 						Please select the output fields <br><br>
 						<table align="center">
 						
@@ -118,7 +119,7 @@
 							</tr>
 						</table>
 						<br> <br> 
-						<input type="submit" value="Select Output Fields" />
+						<input type="submit" value="Select Fields" />
 					</form>
 				</div>
 				</div>

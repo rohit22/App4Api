@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta name="viewport"
@@ -11,28 +16,19 @@
 	<div class="wrap">
 		<!-- tab style-1 -->
 		<div class="row">
+		<a href="index.html"> Home </a><br><br>
 			<div class="grid_12 columns">
-
-				<div align="center">
-					<!-- >div class="form">
-						<form action="upload.jsp">
-							<input type="submit" value="Preset">
-						</form>
-					</div-->
-					<div class="form">
-						<form action="Hello.htm">
-							<input type="submit" value="New">
-						</form>
-					</div>
-					<div class="form">
-						<form action="Form.jsp">
-							<input type="submit" value="Preset">
-						</form>
-					</div>
+				<div class="tab.style-1">
+					<dl>
+						<%
+							out.print("<b>" + "Email will be sent to email-id: "
+									+ request.getAttribute("email") + "</b>");
+						%>
+					</dl>
 				</div>
-
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

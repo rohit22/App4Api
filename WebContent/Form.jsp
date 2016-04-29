@@ -78,10 +78,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									onblur="if (this.placeholder == '') {this.placeholder = '';}"
 									required>
 								<input type="radio" class="active textbox"
-									name="email" value="email" required> Email
+									name="sendEmail" value="email" required> Email
 								
 								<input type="radio" class="active textbox"
-									name="email" value="download" required> Download <br> 
+									name="sendEmail" value="download" required> Download <br> 
 									
 								<input type="file" name="uploadFile" /> 
 								
@@ -108,10 +108,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									required>
 									
 								<input type="radio" class="active textbox"
-									name="email" value="email" required> Email
+									name="sendEmail" value="email" required> Email
 								
 								<input type="radio" class="active textbox"
-									name="email" value="download" required> Download <br> 
+									name="sendEmail" value="download" required> Download <br> 
 									
 								<input type="file" name="uploadFile" /> 
 								
@@ -140,10 +140,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									required>
 									
 								<input type="radio" class="active textbox"
-									name="email" value="email" required> Email
+									name="sendEmail" value="email" required> Email
 								
 								<input type="radio" class="active textbox"
-									name="email" value="download" required> Download <br> 
+									name="sendEmail" value="download" required> Download <br> 
 									
 								<input type="file" name="uploadFile" /> 
 								

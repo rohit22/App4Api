@@ -110,13 +110,14 @@ public class FileUploadServlet extends HttpServlet {
 								+ storeFile.getAbsolutePath());
 						// saves the file on disk
 						item.write(storeFile);
-						request.setAttribute("message",
-								"Upload has been done successfully! yeah");
+						// request.setAttribute("message",
+						// "Email Sent");
 					} else {
 
 						String name = item.getFieldName();// text1
 						String value = item.getString();
-						System.out.println("name->" + name + "value->" + value);
+						System.out
+								.println("name->" + name + " value->" + value);
 						if (!keyValues.containsKey(name)) {
 							keyValues.put(name, value);
 						}
@@ -124,19 +125,53 @@ public class FileUploadServlet extends HttpServlet {
 					}
 				}
 			}
+			System.out.println(keyValues.keySet());
+			LongProcess lp = new LongProcess(keyValues, uploadPath,
+					inputfilePath, configPath, request, response);
+			lp.start();
+			String sendEmailVal = keyValues.get("sendEmail");
+			if (!sendEmailVal.equals("email")) {
+				while (lp.getProgress() != 100) {
+					request.setAttribute("progress", lp.getProgress());
+				}
+			}
+			try {
+				getServletContext().getRequestDispatcher("/message.jsp")
+						.forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		} catch (Exception ex) {
 			request.setAttribute("message",
 					"There was an error: " + ex.getMessage());
 		}
+		// redirects client to message page
+		// / getServletContext().getRequestDispatcher("/message.jsp").forward(
+		// request, response);
+	}
+
+	private static void process(HashMap<String, String> keyValues,
+			String uploadPath, String inputfilePath, String configPath,
+			HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		if (keyValues.keySet().size() > 0) {
 			if (keyValues.get("type").equals("HumanResource")
 					&& inputfilePath != null) {
 				String outputPath = uploadPath + File.separator + "test.csv";
 				outputPath = RunAPI.runHR(outputPath, inputfilePath,
 						configPath, keyValues);
-				writeToResponse(outputPath, response);
 				for (String key : keyValues.keySet()) {
 					request.setAttribute(key, keyValues.get(key));
+				}
+
+				if (!keyValues.get("sendEmail").equals("email")) {
+					writeToResponse(outputPath, response,
+							keyValues.get("sendEmail"));
 				}
 			} else if (keyValues.get("type").equals("InternetArchive")
 					&& inputfilePath != null) {
@@ -144,28 +179,47 @@ public class FileUploadServlet extends HttpServlet {
 				String outputPath = uploadPath + File.separator + "test.csv";
 				outputPath = RunAPI.runIA(outputPath, inputfilePath,
 						configPath, keyValues);
-				writeToResponse(outputPath, response);
 				for (String key : keyValues.keySet()) {
 					request.setAttribute(key, keyValues.get(key));
 				}
+
+				if (!keyValues.get("sendEmail").equals("email")) {
+					writeToResponse(outputPath, response,
+							keyValues.get("sendEmail"));
+				}
 			} else if (keyValues.get("type").equals("GeoCode")
-					&& inputfilePath != null){
+					&& inputfilePath != null) {
 				String outputPath = uploadPath + File.separator + "test.csv";
-				outputPath = RunAPI.runGeo(outputPath, inputfilePath,
+				outputPath = RunAPI.runGeo(inputfilePath, outputPath,
 						configPath, keyValues);
-				writeToResponse(outputPath, response);
+
 				for (String key : keyValues.keySet()) {
 					request.setAttribute(key, keyValues.get(key));
+				}
+
+				if (!keyValues.get("sendEmail").equals("email")) {
+					writeToResponse(outputPath, response,
+							keyValues.get("sendEmail"));
+				}
+			} else if (keyValues.get("type").equals("General")
+					&& inputfilePath != null) {
+				String outputPath = uploadPath + File.separator + "test.csv";
+				outputPath = RunAPI.runGeneral(inputfilePath, outputPath,
+						keyValues);
+				System.out.println(outputPath);
+				if (!keyValues.get("sendEmail").equals("email")) {
+					for (String key : keyValues.keySet()) {
+						request.setAttribute(key, keyValues.get(key));
+					}
+					writeToResponse(outputPath, response,
+							keyValues.get("sendEmail"));
 				}
 			}
 		}
-		// redirects client to message page
-		// / getServletContext().getRequestDispatcher("/message.jsp").forward(
-		// request, response);
 	}
 
 	private static void writeToResponse(String outputPath,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response, String email) throws IOException {
 		response.setHeader("Content-type", "application/csv");
 		response.setHeader("Content-disposition", "inline; filename=test.csv");
 		PrintWriter out = response.getWriter();
@@ -178,6 +232,46 @@ public class FileUploadServlet extends HttpServlet {
 		out.flush();
 		out.close();
 		br.close();
+	}
+
+	class LongProcess extends Thread {
+
+		private int progress;
+		HashMap<String, String> keyValues;
+		String uploadPath;
+		String inputfilePath;
+		String configPath;
+		HttpServletRequest request;
+		HttpServletResponse response;
+
+		public LongProcess(HashMap<String, String> keyValues,
+				String uploadPath, String inputfilePath, String configPath,
+				HttpServletRequest request, HttpServletResponse response) {
+			this.keyValues = keyValues;
+			this.uploadPath = uploadPath;
+			this.inputfilePath = inputfilePath;
+			this.configPath = configPath;
+			this.request = request;
+			this.response = response;
+			progress = 0;
+		}
+
+		public void run() {
+
+			try {
+				process(keyValues, uploadPath, inputfilePath, configPath,
+						request, response);
+				progress = 100;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		public int getProgress() {
+			return progress;
+		}
+
 	}
 
 }
