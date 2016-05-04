@@ -203,7 +203,7 @@ public class FileUploadServlet extends HttpServlet {
 				}
 			} else if (keyValues.get("type").equals("General")
 					&& inputfilePath != null) {
-				String outputPath = uploadPath + File.separator + "test.csv";
+				String outputPath = uploadPath + File.separator + "test_"+System.currentTimeMillis()+".csv";
 				outputPath = RunAPI.runGeneral(inputfilePath, outputPath,
 						keyValues);
 				System.out.println(outputPath);
