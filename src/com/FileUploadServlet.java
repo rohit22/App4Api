@@ -136,6 +136,7 @@ public class FileUploadServlet extends HttpServlet {
 				}
 			}
 			try {
+				request.setAttribute("email", keyValues.get("email"));
 				getServletContext().getRequestDispatcher("/message.jsp")
 						.forward(request, response);
 			} catch (ServletException e) {
@@ -162,7 +163,7 @@ public class FileUploadServlet extends HttpServlet {
 		if (keyValues.keySet().size() > 0) {
 			if (keyValues.get("type").equals("HumanResource")
 					&& inputfilePath != null) {
-				String outputPath = uploadPath + File.separator + "test.csv";
+				String outputPath = uploadPath + File.separator + "test_"+System.currentTimeMillis()+".csv";
 				outputPath = RunAPI.runHR(outputPath, inputfilePath,
 						configPath, keyValues);
 				for (String key : keyValues.keySet()) {
@@ -176,7 +177,7 @@ public class FileUploadServlet extends HttpServlet {
 			} else if (keyValues.get("type").equals("InternetArchive")
 					&& inputfilePath != null) {
 
-				String outputPath = uploadPath + File.separator + "test.csv";
+				String outputPath = uploadPath + File.separator + "test_"+System.currentTimeMillis()+".csv";
 				outputPath = RunAPI.runIA(outputPath, inputfilePath,
 						configPath, keyValues);
 				for (String key : keyValues.keySet()) {
@@ -189,7 +190,7 @@ public class FileUploadServlet extends HttpServlet {
 				}
 			} else if (keyValues.get("type").equals("GeoCode")
 					&& inputfilePath != null) {
-				String outputPath = uploadPath + File.separator + "test.csv";
+				String outputPath = uploadPath + File.separator + "test_"+System.currentTimeMillis()+".csv";
 				outputPath = RunAPI.runGeo(inputfilePath, outputPath,
 						configPath, keyValues);
 
@@ -221,7 +222,7 @@ public class FileUploadServlet extends HttpServlet {
 	private static void writeToResponse(String outputPath,
 			HttpServletResponse response, String email) throws IOException {
 		response.setHeader("Content-type", "application/csv");
-		response.setHeader("Content-disposition", "inline; filename=test.csv");
+		response.setHeader("Content-disposition", "inline; filename=result.csv");
 		PrintWriter out = response.getWriter();
 		BufferedReader br = new BufferedReader(new FileReader(new File(
 				outputPath)));
