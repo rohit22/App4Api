@@ -1,7 +1,7 @@
 package com;
 
 
-public class Check {
+public class TestUrlCall {
 
 	/**
 	 * @param args
