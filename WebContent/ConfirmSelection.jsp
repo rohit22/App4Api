@@ -52,7 +52,7 @@
 					session.setAttribute("output", keyValues);
 					if (inputKeys!=0 && outputKeys!=0){ %>			
 					<div class="form">
-						<form action="DisplayResults.jsp" method="POST">
+						<form action="UserInput.jsp" method="POST">
 							<input type="submit" value="Confirm" />
 						</form>
 					</div>

@@ -54,7 +54,7 @@
 				%>
 				<div class="form">
 				<div class="squaredFour">
-					<form action="ConfirmValues.jsp" method="POST">
+					<form action="ConfirmSelection.jsp" method="POST">
 						Please select the input fields <br><br>
 						<table align="center">
 						
