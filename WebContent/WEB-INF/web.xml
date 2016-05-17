@@ -24,7 +24,7 @@
 		<description>Location to store uploaded file</description>
 		<param-name>file-upload</param-name>
 		<param-value>
-         C:\Users\Admin\Documents\DigitalIntern2015\Output
+         /home/rohitb/temp2_di
      </param-value>
 
 	</context-param>
