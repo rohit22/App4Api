@@ -1,6 +1,5 @@
 package com;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.api.run.RunForLargeFileGeneral;
@@ -66,7 +65,7 @@ public class RunAPI {
 		String sendEmailVal = keyValues.get("sendEmail");
 		boolean sendEmail = false;
 		if (sendEmailVal.equals("email")) {
-			System.out.println("Yes Sending email");
+	//		System.out.println("Yes Sending email");
 			sendEmail = true;
 		}
 		if (Integer.parseInt(keyValues.get("inStreet")) == -1) {
@@ -75,7 +74,7 @@ public class RunAPI {
 		if (Integer.parseInt(keyValues.get("crStreet")) == -1) {
 			keyValues.put("crStreet", keyValues.get("street"));
 		}
-		System.out.println("Running Geo");
+	//	System.out.println("Running Geo");
 		outputFile = check.runGeoWithFile(inputFile, outputFile, keys,
 				Integer.parseInt(keyValues.get("inStreet")),
 				Integer.parseInt(keyValues.get("borough")),
@@ -94,22 +93,22 @@ public class RunAPI {
 		String sendEmailVal = keyValues.get("sendEmail");
 		boolean sendEmail = false;
 		if (sendEmailVal.equals("email")) {
-			System.out.println("Yes Sending email");
+		//	System.out.println("Yes Sending email");
 			sendEmail = true;
 		}
 		String keysS = keyValues.get("keys");
 		String[] keys = keysS.split(",");
-		System.out.println(keysS);
+		//System.out.println(keysS);
 		HashMap<String, Integer> keyValuesData = new HashMap<String, Integer>();
 		String inputKeysS = keyValues.get("inputKeys");
 		String[] inputKeys = inputKeysS.split(",");
 		for (String key : inputKeys) {
 			if (key.trim().length() > 0) {
-				System.out.println(key);
+			//	System.out.println(key);
 				keyValuesData.put(key, Integer.parseInt(keyValues.get(key)));
 			}
 		}
-		System.out.println("Here!");
+//		System.out.println("Here!");
 		outputFile = check.runGeneralWithFile(inputFile, outputFile, keys,
 				keyValuesData, sendEmail, keyValues.get("email"));
 		return outputFile;

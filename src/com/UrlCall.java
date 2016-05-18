@@ -59,7 +59,7 @@ public class UrlCall {
 		String query = aURL.getQuery();
 		String restUrl = url.replace(query, "");
 		this.queryParams = splitQuery(query);
-		System.out.println(this.queryParams);
+		//System.out.println(this.queryParams);
 		return constructURL(restUrl, this.queryParams);
 	}
 

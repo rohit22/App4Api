@@ -1,17 +1,20 @@
 <%@page import="java.net.URLDecoder"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page import="java.io.*,java.util.*"%>
+<!-- This file has a form in which the user enters the column numbers from the input file the user uploads.
+The fields of the form are from the previous page. -->
 <html>
 <head>
+<!--  
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
+<script type="text/javascript" src="js/JFCore.js"></script>
+-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/style.css" />
-<script type="text/javascript" src="js/JFCore.js"></script>
-<script src="scripts/jquery.min.js"></script>
-<script src="scripts/ww.jquery.min.js"></script>
-<script type="text/javascript">
+
+<script type="text/javascript"> 
  function showHide() {
    var div = document.getElementById("hidden_div");
    if (div.style.display == 'none') {
@@ -23,9 +26,10 @@
  }
 </script>
 
-<title>Reading Checkbox Data</title>
+<title>User Input</title>
 </head>
 <body>
+<div class="topcorner"><a href="index.html"><img src="images/home.png" alt="Home" border=0></a></div>
 	<div class="wrap">
 		<!-- tab style-1 -->
 		<div class="row">
