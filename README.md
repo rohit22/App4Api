@@ -19,4 +19,5 @@ In the given example, the user might be interested in the 3 words returned by th
 A final presentation was made on this application at the Digital Centers Intern showcase. The slides of the same can be found at [slides] (https://docs.google.com/a/columbia.edu/presentation/d/1kKKO3qvJ4KAkEQh1gG5j42qJvrwbdD1_1AYfllNh8Wg/edit?usp=sharing)
 
 ## Contact
-Rohit Bharadwaj G (rbg2134)
+This documentation should help in exploring the project. In case of any questions, feel free to reach out to Digital Social Science Center at Columbia University.
+
